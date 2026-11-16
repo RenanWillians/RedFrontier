@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic page settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Space Mission Start</title>
+
+    <!-- CSS file for the home screen -->
+    <link rel="stylesheet" href="inicial.css">
+</head>
+
+<body>
+
+    <!-- Main container -->
+    <main class="inicio-container">
+
+        <!-- Astronaut area -->
+        <section class="astronauta-area">
+
+            <!-- Image located inside the uploads folder -->
+            <img
+                src="uploads/Astronauta.png"
+                alt="Astronaut welcoming the captain"
+                class="astronauta-img"
+            >
+
+        </section>
+
+        <!-- Messages and interactions area -->
+        <section class="conteudo-area">
+
+            <!-- Astronaut's initial message -->
+            <div class="balao" id="balaoInicial">
+
+                <h1>Welcome to our studies!</h1>
+
+                <p>
+                    You have been promoted to the new captain of our spacecraft.
+                    Complete the studies to test your knowledge and
+                    make the best decisions to save your team
+                    and the people you are responsible for.
+                </p>
+
+                <p>
+                    Enter your name in the field below. Analyze carefully
+                    and act responsibly, because our team is counting
+                    on you, Captain!
+                </p>
+
+            </div>
+
+            <!-- Form for captain identification -->
+            <form id="nomeForm" class="formulario">
+
+                <label for="nomeCapitao">Captain's name:</label>
+
+                <input
+                    type="text"
+                    id="nomeCapitao"
+                    placeholder="Enter your name"
+                    autocomplete="name"
+                    maxlength="60"
+                    required
+                >
+
+                <button type="submit">
+                    Submit name
+                </button>
+
+            </form>
+
+            <!-- Confirmation to start the quiz -->
+            <div id="confirmacao" class="confirmacao escondido">
+
+                <div class="balao">
+
+                    <h2 id="mensagemCapitao"></h2>
+
+                    <p>
+                        Let's begin the knowledge test to
+                        improve decision-making.
+                    </p>
+
+                    <p>
+                        Are you ready to begin, Captain?
+                    </p>
+
+                </div>
+
+                <!-- Confirmation buttons -->
+                <div class="botoes-confirmacao">
+
+                    <button type="button" id="iniciarQuiz">
+                        Yes, let's begin!
+                    </button>
+
+                    <button type="button" id="voltar">
+                        Back
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript for the home screen -->
+    <script>
+
+        // Capture the page elements
+        const nomeForm = document.getElementById("nomeForm");
+        const nomeInput = document.getElementById("nomeCapitao");
+
+        const balaoInicial = document.getElementById("balaoInicial");
+        const confirmacao = document.getElementById("confirmacao");
+
+        const mensagemCapitao = document.getElementById("mensagemCapitao");
+
+        const iniciarQuiz = document.getElementById("iniciarQuiz");
+        const voltar = document.getElementById("voltar");
+
+        // Variable that stores the captain's name
+        let nomeDoCapitao = "";
+
+        // Event executed when the user submits the form
+        nomeForm.addEventListener("submit", function(event) {
+
+            // Prevents the page from reloading
+            event.preventDefault();
+
+            // Captures the entered name
+            nomeDoCapitao = nomeInput.value.trim();
+
+            // Checks whether the name was entered
+            if (nomeDoCapitao === "") {
+
+                alert("Captain, please enter your name!");
+
+                nomeInput.focus();
+
+                return;
+            }
+
+            // Stores the name for use in the quiz
+            sessionStorage.setItem("nomeDoCapitao", nomeDoCapitao);
+
+            // Personalizes the astronaut's message
+            mensagemCapitao.textContent =
+                "Excellent, Captain " + nomeDoCapitao + "!";
+
+            // Hides the introduction and form
+            balaoInicial.classList.add("escondido");
+            nomeForm.classList.add("escondido");
+
+            // Displays the confirmation
+            confirmacao.classList.remove("escondido");
+
+        });
+
+        // Event to start the quiz
+        iniciarQuiz.addEventListener("click", function() {
+
+            // Checks whether a name has been stored
+            const nomeSalvo = sessionStorage.getItem("nomeDoCapitao");
+
+            if (!nomeSalvo) {
+
+                alert("Enter your name before starting the mission!");
+
+                return;
+            }
+
+            // Opens the questions and answers page
+            window.location.href = "story.html";
+
+        });
+
+        // Event to go back and change the name
+        voltar.addEventListener("click", function() {
+
+            // Hides the confirmation
+            confirmacao.classList.add("escondido");
+
+            // Displays the introduction again
+            balaoInicial.classList.remove("escondido");
+
+            // Displays the form again
+            nomeForm.classList.remove("escondido");
+
+            // Keeps the previously entered name
+            nomeInput.value = nomeDoCapitao;
+
+            // Allows the name to be edited
+            nomeInput.focus();
+
+        });
+
+    </script>
+
+</body>
+</html>

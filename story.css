@@ -1,0 +1,974 @@
+
+/* =====================================================
+   SPACE EXPLORER
+   Identidade visual do quiz espacial
+===================================================== */
+
+
+/* 1. VARIÁVEIS */
+
+:root {
+    --background: #070b1c;
+    --panel: #111a35;
+    --panel-light: #192648;
+    --panel-hover: #22345e;
+
+    --cyan: #62ddff;
+    --purple: #a78bfa;
+
+    --white: #f5f7ff;
+    --muted: #aab7d3;
+
+    --green: #38d9a2;
+    --green-bg: rgba(56, 217, 162, 0.11);
+
+    --red: #ff718c;
+    --red-bg: rgba(255, 113, 140, 0.11);
+
+    --border: rgba(145, 174, 255, 0.18);
+}
+
+
+/* 2. RESET E CONFIGURAÇÕES GERAIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    min-height: 100vh;
+    padding: 35px 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    overflow-x: hidden;
+
+    color: var(--white);
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(46, 89, 180, 0.22),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(123, 70, 190, 0.2),
+            transparent 35%
+        ),
+        var(--background);
+}
+
+
+/* 3. FUNDO ESPACIAL */
+
+.space-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 100px 80px, #9bdcff, transparent),
+        radial-gradient(2px 2px at 180px 150px, #fff, transparent),
+        radial-gradient(1px 1px at 250px 40px, #b8a5ff, transparent);
+
+    background-size: 300px 220px;
+    opacity: 0.4;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.16;
+}
+
+.planet-one {
+    width: 230px;
+    height: 230px;
+    top: 8%;
+    left: -110px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #80dfff,
+            #3454a2 55%,
+            #151b49
+        );
+
+    box-shadow: 0 0 70px rgba(74, 130, 255, 0.25);
+}
+
+.planet-two {
+    width: 160px;
+    height: 160px;
+    right: -65px;
+    bottom: 8%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d6a5ff,
+            #7749b5 60%,
+            #281b55
+        );
+
+    box-shadow: 0 0 60px rgba(167, 139, 250, 0.2);
+}
+
+
+/* 4. CONTAINER PRINCIPAL */
+
+.game-container {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 850px;
+
+    padding: 32px;
+
+    background: rgba(12, 20, 45, 0.94);
+
+    border: 1px solid var(--border);
+    border-radius: 25px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.42),
+        0 0 45px rgba(74, 130, 255, 0.08);
+
+    backdrop-filter: blur(18px);
+}
+
+
+/* 5. CABEÇALHO */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+    margin-bottom: 32px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-symbol {
+    color: var(--cyan);
+    font-size: 30px;
+    text-shadow: 0 0 18px rgba(98, 221, 255, 0.6);
+}
+
+.brand strong {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.brand small {
+    display: block;
+    margin-top: 4px;
+
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.mission-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    color: var(--cyan);
+    background: rgba(98, 221, 255, 0.08);
+
+    border: 1px solid rgba(98, 221, 255, 0.22);
+    border-radius: 30px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    background: var(--green);
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px var(--green);
+}
+
+
+/* 6. GUIA ALIENÍGENA */
+
+.guide-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin-bottom: 30px;
+}
+
+.alien-container {
+    width: 120px;
+    height: 120px;
+
+    position: relative;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alien-aura {
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    background: rgba(98, 221, 255, 0.16);
+    border-radius: 50%;
+    filter: blur(17px);
+}
+
+.alien {
+    position: relative;
+    font-size: 78px;
+
+    filter: drop-shadow(
+        0 0 15px rgba(98, 221, 255, 0.35)
+    );
+
+    animation: float 3.5s ease-in-out infinite;
+}
+
+.guide-dialog {
+    flex: 1;
+
+    padding: 20px 23px;
+
+    background: linear-gradient(
+        120deg,
+        rgba(33, 53, 100, 0.8),
+        rgba(24, 35, 75, 0.85)
+    );
+
+    border: 1px solid rgba(98, 221, 255, 0.2);
+    border-radius: 17px;
+}
+
+.eyebrow {
+    display: block;
+
+    color: var(--cyan);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+
+.guide-dialog h2 {
+    margin: 8px 0;
+
+    font-size: 21px;
+}
+
+.guide-dialog p {
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* 7. PAINEL DO QUIZ */
+
+.quiz-panel {
+    padding: 27px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(22, 35, 70, 0.98),
+        rgba(13, 23, 50, 0.98)
+    );
+
+    border: 1px solid rgba(145, 174, 255, 0.2);
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.panel-header h2 {
+    margin-top: 7px;
+    font-size: 19px;
+}
+
+.question-counter {
+    padding: 9px 12px;
+
+    color: var(--purple);
+    background: rgba(167, 139, 250, 0.1);
+
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* 8. PROGRESSO */
+
+.progress-track {
+    width: 100%;
+    height: 7px;
+
+    margin: 23px 0 28px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--purple)
+    );
+
+    border-radius: inherit;
+    box-shadow: 0 0 12px rgba(98, 221, 255, 0.4);
+
+    transition: width 0.4s ease;
+}
+
+
+/* 9. ENUNCIADO DA PERGUNTA */
+
+.question-section {
+    margin-bottom: 23px;
+}
+
+.question-label {
+    display: inline-block;
+
+    margin-bottom: 13px;
+    padding: 7px 11px;
+
+    color: var(--cyan);
+    background: rgba(98, 221, 255, 0.08);
+
+    border: 1px solid rgba(98, 221, 255, 0.15);
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.question-section h1 {
+    max-width: 680px;
+
+    margin-bottom: 10px;
+
+    font-size: 24px;
+    line-height: 1.45;
+}
+
+.question-hint {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* 10. ALTERNATIVAS */
+
+.answers-list {
+    display: grid;
+    gap: 12px;
+}
+
+.answer-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 15px 17px;
+
+    color: var(--white);
+    background: rgba(37, 54, 94, 0.55);
+
+    border: 1px solid rgba(145, 174, 255, 0.17);
+    border-radius: 13px;
+
+    text-align: left;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.answer-option:hover:not(:disabled) {
+    background: rgba(53, 77, 133, 0.7);
+    border-color: var(--cyan);
+
+    transform: translateY(-2px);
+}
+
+.answer-option.selected {
+    background: rgba(98, 221, 255, 0.11);
+    border-color: var(--cyan);
+
+    box-shadow: 0 0 16px rgba(98, 221, 255, 0.08);
+}
+
+.answer-letter {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    color: var(--cyan);
+    background: rgba(98, 221, 255, 0.1);
+
+    border: 1px solid rgba(98, 221, 255, 0.2);
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.answer-option:disabled {
+    cursor: default;
+}
+
+.answer-option.correct {
+    color: #c8ffeb;
+    background: var(--green-bg);
+    border-color: var(--green);
+}
+
+.answer-option.correct .answer-letter {
+    color: #071b16;
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.answer-option.incorrect {
+    color: #ffd5df;
+    background: var(--red-bg);
+    border-color: var(--red);
+}
+
+.answer-option.incorrect .answer-letter {
+    color: white;
+    background: var(--red);
+    border-color: var(--red);
+}
+
+
+/* 11. BOTÃO ENVIAR RESPOSTA */
+
+.primary-button,
+.next-button {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 22px;
+    padding: 16px;
+
+    color: #071326;
+    background: linear-gradient(
+        100deg,
+        var(--cyan),
+        #8c9dff
+    );
+
+    border: none;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(98, 221, 255, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.primary-button:hover:not(:disabled),
+.next-button:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+}
+
+.primary-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* 12. PAINEL DE FEEDBACK */
+
+.feedback-panel {
+    margin-top: 22px;
+    padding: 21px;
+
+    border-radius: 14px;
+
+    animation: showFeedback 0.35s ease;
+}
+
+.feedback-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    margin-bottom: 15px;
+}
+
+.feedback-icon {
+    width: 39px;
+    height: 39px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.feedback-heading h3 {
+    margin-top: 5px;
+    font-size: 19px;
+}
+
+.feedback-panel p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* Feedback de acerto */
+
+.feedback-panel.is-correct {
+    color: #d6fff0;
+
+    background: var(--green-bg);
+
+    border: 1px solid rgba(56, 217, 162, 0.55);
+    border-left: 4px solid var(--green);
+}
+
+.feedback-panel.is-correct .feedback-icon {
+    color: #06251b;
+    background: var(--green);
+}
+
+.feedback-panel.is-correct .eyebrow {
+    color: var(--green);
+}
+
+
+/* Feedback de erro */
+
+.feedback-panel.is-incorrect {
+    color: #ffe0e6;
+
+    background: var(--red-bg);
+
+    border: 1px solid rgba(255, 113, 140, 0.55);
+    border-left: 4px solid var(--red);
+}
+
+.feedback-panel.is-incorrect .feedback-icon {
+    color: white;
+    background: var(--red);
+}
+
+.feedback-panel.is-incorrect .eyebrow {
+    color: var(--red);
+}
+
+
+/* Indicação da alternativa correta */
+
+.correct-answer {
+    margin-top: 16px;
+    padding: 12px 14px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 9px;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.correct-answer strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+
+/* 13. BOTÃO DE PRÓXIMA PERGUNTA */
+
+.next-button {
+    color: white;
+
+    background: linear-gradient(
+        100deg,
+        #526fe0,
+        #8b72df
+    );
+
+    box-shadow: 0 8px 25px rgba(113, 111, 230, 0.15);
+}
+
+
+/* 14. RESULTADO FINAL */
+
+.result-panel {
+    padding: 35px 28px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        145deg,
+        rgba(22, 35, 70, 0.98),
+        rgba(13, 23, 50, 0.98)
+    );
+
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    animation: showFeedback 0.4s ease;
+}
+
+.result-icon {
+    margin-bottom: 18px;
+    font-size: 70px;
+}
+
+.result-panel h1 {
+    margin: 12px 0;
+    font-size: 28px;
+}
+
+#final-score {
+    margin: 12px 0 22px;
+
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.score-card {
+    padding: 20px;
+
+    background: rgba(98, 221, 255, 0.07);
+
+    border: 1px solid rgba(98, 221, 255, 0.2);
+    border-radius: 14px;
+}
+
+.score-card span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.score-card strong {
+    display: block;
+
+    margin: 10px 0;
+
+    color: var(--cyan);
+    font-size: 35px;
+}
+
+.score-track {
+    height: 7px;
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+#score-fill {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--purple)
+    );
+
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+.result-message {
+    margin-top: 20px;
+
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* 15. RODAPÉ */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-top: 25px;
+
+    color: #8493b6;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+/* 16. ANIMAÇÕES */
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+@keyframes showFeedback {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* 17. ACESSIBILIDADE */
+
+button:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* 18. RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 14px 10px;
+        align-items: flex-start;
+    }
+
+    .game-container {
+        padding: 20px 15px;
+        border-radius: 19px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .brand strong {
+        font-size: 10px;
+    }
+
+    .brand small {
+        font-size: 8px;
+    }
+
+    .mission-tag {
+        padding: 8px;
+        font-size: 8px;
+    }
+
+    .guide-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .alien-container {
+        width: 95px;
+        height: 95px;
+    }
+
+    .alien {
+        font-size: 67px;
+    }
+
+    .guide-dialog {
+        width: 100%;
+    }
+
+    .quiz-panel {
+        padding: 20px 15px;
+    }
+
+    .panel-header h2 {
+        font-size: 16px;
+    }
+
+    .question-counter {
+        font-size: 10px;
+    }
+
+    .question-section h1 {
+        font-size: 20px;
+    }
+
+    .answer-option {
+        padding: 13px;
+        font-size: 13px;
+    }
+
+    .feedback-panel {
+        padding: 16px;
+    }
+
+    .feedback-heading h3 {
+        font-size: 16px;
+    }
+
+    .result-panel {
+        padding: 27px 16px;
+    }
+
+    .result-panel h1 {
+        font-size: 23px;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+
+/* 19. TELAS MUITO PEQUENAS */
+
+@media (max-width: 360px) {
+
+    .game-container {
+        padding: 16px 11px;
+    }
+
+    .panel-header {
+        align-items: flex-start;
+    }
+
+    .panel-header h2 {
+        font-size: 14px;
+    }
+
+    .question-section h1 {
+        font-size: 18px;
+    }
+
+    .answer-option {
+        gap: 9px;
+        font-size: 12px;
+    }
+
+}

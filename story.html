@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d20">
+
+
+
+
+    <title>Space Explorer | Space Quiz</title>
+
+    <!-- Connects the stylesheet -->
+    <link rel="stylesheet" href="story.css">
+
+    <!-- Loads the game logic after parsing the HTML -->
+    <script src="story.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Decorative background elements -->
+    <div class="space-background" aria-hidden="true">
+        <div class="stars"></div>
+        <div class="planet planet-one"></div>
+        <div class="planet planet-two"></div>
+    </div>
+
+    <main class="game-container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="brand">
+                <span class="brand-symbol">✦</span>
+                <div>
+                    <strong>SPACE EXPLORER</strong>
+                    <small>KNOWLEDGE MISSION</small>
+                </div>
+            </div>
+
+            <div class="mission-tag">
+                <span class="status-dot"></span>
+                MISSION 001
+            </div>
+        </header>
+
+
+        <!-- GUIDE INTRODUCTION -->
+        <section class="guide-section">
+
+            <div class="alien-container" aria-hidden="true">
+                <div class="alien-aura"></div>
+                <div class="alien">👽</div>
+            </div>
+
+            <div class="guide-dialog">
+                <span class="eyebrow">YOUR SPACE GUIDE</span>
+
+                <h2 id="guide-title">Hello, explorer!</h2>
+
+                <p id="alien-message" aria-live="polite">
+                    Get ready for a journey through the universe!
+                    Answer the questions and discover interesting facts
+                    about the Moon, Mars, and Earth.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- MAIN QUIZ AREA -->
+        <section class="quiz-panel" id="quiz-panel">
+
+            <!-- PANEL HEADER -->
+            <div class="panel-header">
+
+                <div>
+                    <span class="eyebrow">ASTRONOMICAL CHALLENGE</span>
+                    <h2>Test your knowledge</h2>
+                </div>
+
+                <div class="question-counter" id="progress">
+                    01 / 03
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS BAR -->
+            <div
+                class="progress-track"
+                role="progressbar"
+                aria-label="Quiz progress"
+                aria-valuemin="0"
+                aria-valuemax="3"
+                aria-valuenow="0"
+                id="progress-container"
+            >
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+
+            <!-- QUESTION -->
+            <div class="question-section">
+
+                <span class="question-label" id="question-number">
+                    QUESTION 01
+                </span>
+
+                <h1 id="question">
+                    Are you ready to begin?
+                </h1>
+
+                <p class="question-hint">
+                    Choose one of the options below.
+                </p>
+
+            </div>
+
+
+            <!-- ANSWER OPTIONS -->
+            <div
+                class="answers-list"
+                id="answers"
+                role="group"
+                aria-label="Question answer options"
+            ></div>
+
+
+            <!-- SUBMIT BUTTON -->
+            <button
+                type="button"
+                class="primary-button"
+                id="submit-button"
+                disabled
+            >
+                Submit answer
+                <span aria-hidden="true">➜</span>
+            </button>
+
+
+            <!-- FEEDBACK PANEL -->
+            <section
+                class="feedback-panel"
+                id="feedback-box"
+                aria-live="polite"
+                hidden
+            >
+
+                <div class="feedback-heading">
+
+                    <span class="feedback-icon" id="feedback-icon">
+                        ✓
+                    </span>
+
+                    <div>
+                        <span class="eyebrow">ANSWER RESULT</span>
+                        <h3 id="feedback-title">Correct answer!</h3>
+                    </div>
+
+                </div>
+
+                <p id="feedback"></p>
+
+                <div class="correct-answer" id="correct-answer" hidden>
+                    <strong>Correct answer:</strong>
+                    <span id="correct-answer-text"></span>
+                </div>
+
+            </section>
+
+
+            <!-- NEXT BUTTON -->
+            <button
+                type="button"
+                class="next-button"
+                id="next-button"
+                hidden
+            >
+                Next question
+                <span aria-hidden="true">➜</span>
+            </button>
+
+        </section>
+
+
+        <!-- FINAL SCREEN -->
+        <section
+            class="result-panel"
+            id="result-screen"
+            hidden
+        >
+
+            <div class="result-icon">🏆</div>
+
+            <span class="eyebrow">MISSION COMPLETED</span>
+
+            <h1>Congratulations, explorer!</h1>
+
+            <p id="final-score"></p>
+
+            <div class="score-card">
+                <span>YOUR SCORE</span>
+                <strong id="score-number">0/3</strong>
+                <div class="score-track">
+                    <div id="score-fill"></div>
+                </div>
+            </div>
+
+            <p class="result-message" id="result-details"></p>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="restart-button"
+            >
+                <span aria-hidden="true">↻</span>
+                Restart Quiz
+            </button>
+
+
+             <!-- Button to access the interactive globe screen -->
+<button
+    type="button"
+    class="primary-button"
+    id="restart-button"
+    onclick="window.location.href = 'globo.html';"
+>
+    <span aria-hidden="true">📊</span>
+    Analyze More Data
+</button>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <span>NASA SPACE APPS CHALLENGE 2026</span>
+            <span>EXPLORING THE MOON, MARS, AND EARTH</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

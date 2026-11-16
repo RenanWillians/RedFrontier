@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <meta name="description" content="Terra Espelho, da equipe RedFrontier: exploração de ambientes terrestres análogos usando dados oficiais NASA.">
+  <title>Terra Espelho | RedFrontier</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <a class="brand" href="#inicio" aria-label="Terra Espelho, início">
+        <span class="brand-mark" aria-hidden="true">TE</span>
+        <span class="brand-copy">
+          <strong>TERRA ESPELHO</strong>
+          <small>REDFRONTIER · NASA SPACE APPS</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">EXPLORAÇÃO</div>
+      <nav class="main-nav">
+        <a class="menu-link active" href="#inicio"><span class="nav-icon">⌂</span> Visão geral</a>
+        <a class="menu-link" href="#exploracao"><span class="nav-icon">◎</span> Globo 3D</a>
+        <a class="menu-link" href="#dados-nasa"><span class="nav-icon">⌁</span> Dados NASA</a>
+        <a class="menu-link" href="#comparacao"><span class="nav-icon">▤</span> Comparação</a>
+        <a class="menu-link" href="#fontes"><span class="nav-icon">◫</span> Fontes oficiais</a>
+        <a class="menu-link" href="#metodologia"><span class="nav-icon">⌘</span> Metodologia</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-status"><span class="status-dot"></span><span id="sidebarStatus">Dados locais carregados</span></div>
+        <div class="sidebar-version">EQUIPE <strong>REDFRONTIER</strong></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <header class="topbar">
+        <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+        <div class="breadcrumb">
+          <span>Terra Espelho</span>
+          <span class="breadcrumb-separator">/</span>
+          <strong id="breadcrumbCurrent">Visão geral</strong>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="planet-selector" for="planet">
+            <span>ALVO DE ESTUDO</span>
+            <select id="planet" aria-label="Selecionar corpo celeste">
+              <option value="moon" selected>☾ Lua</option>
+              <option value="mars">♂ Marte</option>
+            </select>
+          </label>
+          <span class="topbar-chip"><span class="status-dot"></span><span id="data-status">Dados locais disponíveis</span></span>
+        </div>
+      </header>
+
+      <!-- APRESENTAÇÃO -->
+      <section class="page-section hero-section" id="inicio">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> EXPLORAÇÃO DE ANÁLOGOS TERRESTRES</div>
+          <h1>Encontre na Terra<br><span>pistas de outros mundos.</span></h1>
+          <p class="hero-description">Uma plataforma da equipe RedFrontier para comparar ambientes terrestres com condições relevantes para a exploração lunar e marciana, usando produtos e serviços oficiais da NASA.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#exploracao">Explorar localização <span aria-hidden="true">↗</span></a>
+            <a class="text-button" href="#dados-nasa">Ver dados NASA</a>
+          </div>
+          <div class="team-signature"><span class="team-dot"></span> PROJETO REDFRONTIER · TERRA ESPELHO</div>
+        </div>
+
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="planet planet-earth"><span></span></div>
+          <div class="planet planet-moon"></div>
+          <div class="orbit-label label-earth">TERRA</div>
+          <div class="orbit-label label-moon">LUA</div>
+        </div>
+      </section>
+
+      <!-- INDICADORES GERAIS -->
+      <section class="kpi-grid" aria-label="Resumo do projeto">
+        <article class="kpi-card">
+          <div class="kpi-top"><span>LOCAIS CADASTRADOS</span><span class="kpi-icon">⌖</span></div>
+          <strong class="kpi-value" id="total-locations">1</strong>
+          <span class="kpi-foot">Marcadores independentes no globo</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>FONTE DE DADOS</span><span class="kpi-icon">◉</span></div>
+          <strong class="kpi-value kpi-value-text" id="selected-source">NASA</strong>
+          <span class="kpi-foot">POWER, Earthdata e Worldview</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>INDICADORES CADASTRADOS</span><span class="kpi-icon">▥</span></div>
+          <strong class="kpi-value" id="total-criteria">10</strong>
+          <span class="kpi-foot">Dados previamente fornecidos pela equipe</span>
+        </article>
+        <article class="kpi-card kpi-card-accent">
+          <div class="kpi-top"><span>SCORE PRELIMINAR REDFRONTIER</span><span class="kpi-icon">✦</span></div>
+          <strong class="kpi-value" id="overview-score">0,6760</strong>
+          <span class="kpi-foot">Resultado anterior da equipe · não é dado NASA</span>
+        </article>
+      </section>
+
+      <!-- GLOBO -->
+      <section class="page-section section-block" id="exploracao">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">01 / LOCALIZAÇÃO</div>
+            <h2>Explorador geográfico</h2>
+            <p>Cada marcador possui um cadastro próprio. Clique em um ponto para carregar apenas os dados daquele local.</p>
+          </div>
+          <div class="section-heading-actions">
+            <span class="live-label"><span class="status-dot"></span><span id="globeLocationCount">1 LOCAL NO MAPA</span></span>
+          </div>
+        </div>
+
+        <div class="explorer-layout" id="explorerLayout">
+          <div class="globe-section card-surface" id="globeSection">
+            <div class="globe-toolbar">
+              <span class="map-label"><span class="map-pulse"></span> GLOBO INTERATIVO · MODO LOCAL</span>
+              <span class="globe-hint">Arraste para girar · Role para aproximar</span>
+            </div>
+            <div class="globe-stage" id="globeStage">
+              <div id="globeViz" aria-label="Globo terrestre interativo com localizadores clicáveis"></div>
+              <div class="globe-loading" id="loading"><span class="loading-spinner"></span><span>Preparando globo interativo...</span></div>
+              <div class="globe-fallback" id="globeFallback" hidden>
+                <div class="fallback-globe">🌎</div>
+                <strong>Visualização indisponível</strong>
+                <p>A visualização local não foi iniciada. Recarregue a página para tentar novamente.</p>
+                <button class="small-button" id="retryGlobe" type="button">Tentar novamente</button>
+              </div>
+            </div>
+            <div class="globe-footer">
+              <span><i class="legend-marker"></i><span id="globeSelectedLabel">Challapata, Oruro, Bolívia</span></span>
+              <button class="quiet-button" id="focusLocation" type="button">Centralizar local ↗</button>
+            </div>
+          </div>
+
+          <aside class="info-panel card-surface" id="infoPanel" aria-hidden="true">
+            <div class="panel-topline"><span class="panel-kicker">LOCAL SELECIONADO</span><button class="close-button" id="closePanel" type="button" aria-label="Fechar painel">×</button></div>
+            <div class="location-badge"><span id="location-symbol">🌙</span><span id="location-rank">PONTO DE ESTUDO</span></div>
+            <h3 id="location-name">Challapata</h3>
+            <p class="location-region" id="location-country">Oruro, Bolívia</p>
+            <p class="location-description" id="location-description">Ponto de análise definido pela equipe RedFrontier, em Oruro, Bolívia.</p>
+            <div class="coordinate-box">
+              <span>COORDENADAS DO PONTO DE ANÁLISE</span>
+              <strong id="locationCoords">-19.0148°, -66.9865°</strong>
+              <button class="copy-button" id="copyCoordinates" type="button">Copiar coordenadas</button>
+            </div>
+            <div class="panel-score">
+              <div><span id="panel-score-label">SCORE PRELIMINAR DA EQUIPE</span><strong id="panel-score">0,6760</strong></div>
+              <div class="score-ring" id="scoreRing" role="img" aria-label="Score preliminar 67,6 por cento"><span>67,6%</span></div>
+            </div>
+            <p class="panel-disclaimer" id="panelDisclaimer">Score informado anteriormente pela equipe. Não foi calculado pela NASA e ainda precisa ser reprocessado com dados oficiais rastreáveis.</p>
+            <button class="primary-button panel-action" id="viewIndicators" type="button">Ver dados NASA <span>↓</span></button>
+          </aside>
+        </div>
+
+        <div class="selection-hint" id="selectionHint"><span>ⓘ</span> Clique no marcador para selecionar o local e carregar os dados armazenados.</div>
+        <div class="worldview-action card-surface">
+          <div><span class="card-kicker">VISUALIZAÇÃO SATELITAL OFICIAL</span><strong>NASA Worldview / GIBS</strong><p>Abra as camadas NASA de umidade do solo, aerossóis e reflectância para a área do ponto selecionado.</p></div>
+          <a class="secondary-button" id="worldviewLink" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener noreferrer">Abrir NASA Worldview ↗</a>
+        </div>
+      </section><!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <meta name="description" content="Terra Espelho, da equipe RedFrontier: exploração de ambientes terrestres análogos usando dados oficiais NASA.">
+  <title>Terra Espelho | RedFrontier</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <a class="brand" href="#inicio" aria-label="Terra Espelho, início">
+        <span class="brand-mark" aria-hidden="true">TE</span>
+        <span class="brand-copy">
+          <strong>TERRA ESPELHO</strong>
+          <small>REDFRONTIER · NASA SPACE APPS</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">EXPLORAÇÃO</div>
+      <nav class="main-nav">
+        <a class="menu-link active" href="#inicio"><span class="nav-icon">⌂</span> Visão geral</a>
+        <a class="menu-link" href="#exploracao"><span class="nav-icon">◎</span> Globo 3D</a>
+        <a class="menu-link" href="#dados-nasa"><span class="nav-icon">⌁</span> Dados NASA</a>
+        <a class="menu-link" href="#comparacao"><span class="nav-icon">▤</span> Comparação</a>
+        <a class="menu-link" href="#fontes"><span class="nav-icon">◫</span> Fontes oficiais</a>
+        <a class="menu-link" href="#metodologia"><span class="nav-icon">⌘</span> Metodologia</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-status"><span class="status-dot"></span><span id="sidebarStatus">Dados locais carregados</span></div>
+        <div class="sidebar-version">EQUIPE <strong>REDFRONTIER</strong></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <header class="topbar">
+        <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+        <div class="breadcrumb">
+          <span>Terra Espelho</span>
+          <span class="breadcrumb-separator">/</span>
+          <strong id="breadcrumbCurrent">Visão geral</strong>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="planet-selector" for="planet">
+            <span>ALVO DE ESTUDO</span>
+            <select id="planet" aria-label="Selecionar corpo celeste">
+              <option value="moon" selected>☾ Lua</option>
+              <option value="mars">♂ Marte</option>
+            </select>
+          </label>
+          <span class="topbar-chip"><span class="status-dot"></span><span id="data-status">Dados locais disponíveis</span></span>
+        </div>
+      </header>
+
+      <!-- APRESENTAÇÃO -->
+      <section class="page-section hero-section" id="inicio">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> EXPLORAÇÃO DE ANÁLOGOS TERRESTRES</div>
+          <h1>Encontre na Terra<br><span>pistas de outros mundos.</span></h1>
+          <p class="hero-description">Uma plataforma da equipe RedFrontier para comparar ambientes terrestres com condições relevantes para a exploração lunar e marciana, usando produtos e serviços oficiais da NASA.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#exploracao">Explorar localização <span aria-hidden="true">↗</span></a>
+            <a class="text-button" href="#dados-nasa">Ver dados NASA</a>
+          </div>
+          <div class="team-signature"><span class="team-dot"></span> PROJETO REDFRONTIER · TERRA ESPELHO</div>
+        </div>
+
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="planet planet-earth"><span></span></div>
+          <div class="planet planet-moon"></div>
+          <div class="orbit-label label-earth">TERRA</div>
+          <div class="orbit-label label-moon">LUA</div>
+        </div>
+      </section>
+
+      <!-- INDICADORES GERAIS -->
+      <section class="kpi-grid" aria-label="Resumo do projeto">
+        <article class="kpi-card">
+          <div class="kpi-top"><span>LOCAIS CADASTRADOS</span><span class="kpi-icon">⌖</span></div>
+          <strong class="kpi-value" id="total-locations">1</strong>
+          <span class="kpi-foot">Marcadores independentes no globo</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>FONTE DE DADOS</span><span class="kpi-icon">◉</span></div>
+          <strong class="kpi-value kpi-value-text" id="selected-source">NASA</strong>
+          <span class="kpi-foot">POWER, Earthdata e Worldview</span>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-top"><span>INDICADORES CADASTRADOS</span><span class="kpi-icon">▥</span></div>
+          <strong class="kpi-value" id="total-criteria">10</strong>
+          <span class="kpi-foot">Dados previamente fornecidos pela equipe</span>
+        </article>
+        <article class="kpi-card kpi-card-accent">
+          <div class="kpi-top"><span>SCORE PRELIMINAR REDFRONTIER</span><span class="kpi-icon">✦</span></div>
+          <strong class="kpi-value" id="overview-score">0,6760</strong>
+          <span class="kpi-foot">Resultado anterior da equipe · não é dado NASA</span>
+        </article>
+      </section>
+
+      <!-- GLOBO -->
+      <section class="page-section section-block" id="exploracao">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">01 / LOCALIZAÇÃO</div>
+            <h2>Explorador geográfico</h2>
+            <p>Cada marcador possui um cadastro próprio. Clique em um ponto para carregar apenas os dados daquele local.</p>
+          </div>
+          <div class="section-heading-actions">
+            <span class="live-label"><span class="status-dot"></span><span id="globeLocationCount">1 LOCAL NO MAPA</span></span>
+          </div>
+        </div>
+
+        <div class="explorer-layout" id="explorerLayout">
+          <div class="globe-section card-surface" id="globeSection">
+            <div class="globe-toolbar">
+              <span class="map-label"><span class="map-pulse"></span> GLOBO INTERATIVO · MODO LOCAL</span>
+              <span class="globe-hint">Arraste para girar · Role para aproximar</span>
+            </div>
+            <div class="globe-stage" id="globeStage">
+              <div id="globeViz" aria-label="Globo terrestre interativo com localizadores clicáveis"></div>
+              <div class="globe-loading" id="loading"><span class="loading-spinner"></span><span>Preparando globo interativo...</span></div>
+              <div class="globe-fallback" id="globeFallback" hidden>
+                <div class="fallback-globe">🌎</div>
+                <strong>Visualização indisponível</strong>
+                <p>A visualização local não foi iniciada. Recarregue a página para tentar novamente.</p>
+                <button class="small-button" id="retryGlobe" type="button">Tentar novamente</button>
+              </div>
+            </div>
+            <div class="globe-footer">
+              <span><i class="legend-marker"></i><span id="globeSelectedLabel">Challapata, Oruro, Bolívia</span></span>
+              <button class="quiet-button" id="focusLocation" type="button">Centralizar local ↗</button>
+            </div>
+          </div>
+
+          <aside class="info-panel card-surface" id="infoPanel" aria-hidden="true">
+            <div class="panel-topline"><span class="panel-kicker">LOCAL SELECIONADO</span><button class="close-button" id="closePanel" type="button" aria-label="Fechar painel">×</button></div>
+            <div class="location-badge"><span id="location-symbol">🌙</span><span id="location-rank">PONTO DE ESTUDO</span></div>
+            <h3 id="location-name">Challapata</h3>
+            <p class="location-region" id="location-country">Oruro, Bolívia</p>
+            <p class="location-description" id="location-description">Ponto de análise definido pela equipe RedFrontier, em Oruro, Bolívia.</p>
+            <div class="coordinate-box">
+              <span>COORDENADAS DO PONTO DE ANÁLISE</span>
+              <strong id="locationCoords">-19.0148°, -66.9865°</strong>
+              <button class="copy-button" id="copyCoordinates" type="button">Copiar coordenadas</button>
+            </div>
+            <div class="panel-score">
+              <div><span id="panel-score-label">SCORE PRELIMINAR DA EQUIPE</span><strong id="panel-score">0,6760</strong></div>
+              <div class="score-ring" id="scoreRing" role="img" aria-label="Score preliminar 67,6 por cento"><span>67,6%</span></div>
+            </div>
+            <p class="panel-disclaimer" id="panelDisclaimer">Score informado anteriormente pela equipe. Não foi calculado pela NASA e ainda precisa ser reprocessado com dados oficiais rastreáveis.</p>
+            <button class="primary-button panel-action" id="viewIndicators" type="button">Ver dados NASA <span>↓</span></button>
+          </aside>
+        </div>
+
+        <div class="selection-hint" id="selectionHint"><span>ⓘ</span> Clique no marcador para selecionar o local e carregar os dados armazenados.</div>
+        <div class="worldview-action card-surface">
+          <div><span class="card-kicker">VISUALIZAÇÃO SATELITAL OFICIAL</span><strong>NASA Worldview / GIBS</strong><p>Abra as camadas NASA de umidade do solo, aerossóis e reflectância para a área do ponto selecionado.</p></div>
+          <a class="secondary-button" id="worldviewLink" href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener noreferrer">Abrir NASA Worldview ↗</a>
+        </div>
+      </section>
