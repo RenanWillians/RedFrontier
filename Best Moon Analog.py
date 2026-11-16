@@ -573,6 +573,72 @@ def extrair_emit_grupos_para_gpu(lista_arquivos_nc, grade_ref_cpu):
 mineral_basalto, mineral_marte = extrair_emit_grupos_para_gpu(arq_emit, grade_ref_cpu)
 print("Variáveis 'mineral_basalto' e 'mineral_marte' prontas na GPU:", mineral_basalto.shape, type(mineral_basalto.data))
 
+import cupy as cp
+import xarray as xr
+
+# ==============================================================================
+# BLOCO AUSENTE: CÁLCULO DOS PILARES E SCORE LUNAR FÍSICO NA GPU
+# ==============================================================================
+
+# 1. PILAR SOLO E SECURA
+# Descobre o maior valor de umidade entre todos os perfis para normalização justa
+maior_max_umidade = max(
+    float(umidade_sup.max().data.item()),
+    float(umidade_prof.max().data.item()),
+    float(umidade_perf.max().data.item())
+)
+
+# Quanto mais seco (próximo de 0), maior o score (próximo de 1)
+norm_secura = (1.0 - (umidade_sup / maior_max_umidade)).clip(0, 1)
+
+# Esterilidade: Penaliza qualquer presença de vegetação (NDVI > 0)
+norm_esterilidade = (1.0 - (ndvi.clip(0, None) / float(ndvi.max().data.item()))).clip(0, 1)
+
+score_solo = (
+    0.40 * norm_secura +
+    0.30 * norm_esterilidade +
+    0.30 * aridez_wilt
+)
+
+
+# 2. PILAR TEMPERATURA E ALBEDO
+# A Lua tem amplitude térmica extrema. Normalizamos pelo valor máximo encontrado.
+norm_amp_termica = (amp_termica / float(amp_termica.max().data.item())).clip(0, 1)
+
+# Albedo Lunar é muito escuro (média ~0.12).
+distancia_albedo_lua = abs(albedo - 0.12)
+norm_albedo_lua = (1.0 - (distancia_albedo_lua / 0.12)).clip(0, 1)
+
+score_temperatura = (
+    0.60 * norm_amp_termica +
+    0.40 * norm_albedo_lua
+)
+
+
+# 3. PILAR POEIRA E MINERALOGIA
+# A Lua não possui atmosfera, logo queremos os menores valores de Aerossóis (OMPS/AOD)
+norm_sem_poeira = (1.0 - (aerosol_idx.clip(0, None) / float(aerosol_idx.max().data.item()))).clip(0, 1)
+norm_sem_aod = (1.0 - (aod_modis.clip(0, None) / float(aod_modis.max().data.item()))).clip(0, 1)
+
+# A mineralogia basáltica lunar já foi processada no bloco do sensor EMIT
+norm_mineral = mineral_basalto
+
+score_poeira_mineral = (
+    0.40 * norm_sem_poeira +
+    0.30 * norm_sem_aod +
+    0.30 * norm_mineral
+)
+
+
+# 4. CÁLCULO FINAL DO SCORE LUNAR (FÍSICO)
+# Combina os pilares com pesos baseados na importância física da analogia (sem considerar bases científicas ainda)
+ds_smap["score_lua"] = (
+    0.40 * score_solo +
+    0.40 * score_temperatura +
+    0.20 * score_poeira_mineral
+)
+
+print("✅ Variável 'score_lua' e pilares base calculados com sucesso na GPU!")
 
 # ==============================================================================
 # 1. FILTRAGEM DOS TOP CANDIDATOS NA GPU (COM cp.isfinite + cp.percentile)
